@@ -12,3 +12,8 @@ form {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.container-fluid {
+    background-color: #f4eaff; /* Un fondo suave y acorde al tema */
+    padding: 20px;
+}
