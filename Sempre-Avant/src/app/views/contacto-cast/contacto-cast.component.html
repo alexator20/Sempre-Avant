@@ -1,49 +1,62 @@
 <section>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2>Contacta amb nosaltres</h2>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2>Contacta amb nosaltres</h2>
+        </div>
       </div>
+
+      <div class="row d-flex" style="min-height: 10vh;">
+        <div class="col-md-6 col-12">
+            <div class="card h-100">  <!-- Añadido h-100 aquí -->
+                <div class="card-body"> <!-- Usar card-body para el contenido -->
+                    <form class="g-3">
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Nom" required>
+                            <div class="invalid-feedback">
+                                Per favor, introdueix el teu nom.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="user@gmail.com" required>
+                            <div class="invalid-feedback">
+                                Per favor, introdueix el teu email.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Misatge</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Vuic informació sobre... / Tenia preguntes sobre..." required></textarea>
+                            <div class="invalid-feedback">
+                                Per favor, introdueix el misatge.
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-outline-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div> <!-- Cierre de card-body -->
+            </div>
+        </div>
+    
+        <div class="col-md-6 col-12">
+            <div class="card h-100"> <!-- Añadido h-100 aquí -->
+                <div class="card-body"> <!-- Usar card-body para el contenido -->
+                    <h3>Més informació</h3>
+                    <p><strong>Direcció:</strong> Carrer de Carolina Álvarez 13, baix. 46023 - València.</p>
+                    <p><strong>Telèfon:</strong> +34 669 20 56 53 (Alejandro)</p>
+                    <p><strong>Email:</strong> secretaria&#64;sempreavant.org</p>
+                    <img src="../../../assets/imgs/logo.png" class="img-fluid" alt="foto del logo" style="min-width: 10vh; max-width: 20vh;"> <!-- Ajuste en la imagen -->
+                </div> <!-- Cierre de card-body -->
+            </div>
+        </div>
     </div>
-    <div class="row">
-      <!-- Formulario de contacto -->
-      <div class="col-md-6">
-        <form class="g-3 needs-validation" novalidate>
-          <div class="mb-3">
-            <label for="inputName" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Nom" required>
-            <div class="invalid-feedback">
-              Per favor, introdueix el teu nom.
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="user@gmail.com" required>
-            <div class="invalid-feedback">
-              Per favor, introdueix el teu email.
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Misatge</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-              placeholder="Vuic informació sobre... / Tenia preguntes sobre..." required></textarea>
-            <div class="invalid-feedback">
-              Per favor, introdueix el misatge.
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-outline-primary">Enviar</button>
-          </div>
-        </form>
-      </div>
-      <!-- Información de contacto adicional -->
-      <div class="col-md-6">
-        <h3>Més informació</h3>
-        <p><strong>Direcció:</strong> Carrer de Carolina Álvarez 13, baix. 46023 - València.</p>
-        <p><strong>Telèfon:</strong> +34 669 20 56 53 (Alejandro)</p>
-        <p><strong>Email:</strong> secretaria&#64;sempreavant.org</p>
-        <img src="../../../assets/imgs/logo.png" class="img-fluid" alt="foto del logo">
-      </div>
+    
+
     </div>
   </div>
+
 </section>
