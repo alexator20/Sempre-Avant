@@ -17,3 +17,6 @@ Route::post('/apiUser', [AuthController::class, 'login']);
 Route::get('/api/users', [UserController::class, 'index']);
 Route::post('/api/insertUser', [AuthController::class, 'register']);
 Route::post('/api/updateUser/{id}', [UserController::class, 'update']);
+
+//groups
+Route::get('/api/groups', [UserController::class, 'index']);

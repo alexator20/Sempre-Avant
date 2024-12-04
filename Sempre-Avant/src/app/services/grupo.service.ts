@@ -16,7 +16,7 @@ export class GrupoService {
       .set('page', page.toString())
       .set('pageSize', pageSize.toString());
 
-    return this.http.get<ApiResponseTest>('http://localhost:8000/viewGrupos', { params });
+    return this.http.get<ApiResponseTest>('http://localhost:8000/api/groups', { params });
   }
 
 
