@@ -30,6 +30,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        Log::info('Prueba de log');
+
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255', 'exists:users'],
             'password' => ['required', 'string', 'min:6'],
@@ -37,8 +39,15 @@ class AuthController extends Controller
 
         $user = User::where('name', $data['name'])->first();
 
+        if (Hash::check($data['password'], $user->password)) {
+            Log::info('WTF???');
+        }
         
         if (!$user || !Hash::check($data['password'], $user->password)) {
+            Log::info('Prueba de log entro');
+            Log::info($user);
+            Log::info($data['password']);
+            Log::info($user->password);
             return response()->json([
                 'message' => 'The provided credentials are incorrect.'
             ], 401);

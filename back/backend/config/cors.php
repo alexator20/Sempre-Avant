@@ -3,9 +3,9 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
     | Here you may configure your settings for cross-origin resource sharing
     | or "CORS". This determines what cross-origin operations may execute
@@ -15,20 +15,23 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'api*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'viewGrupos'],  // Make sure this matches your routes
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['*'],  // Allows all methods (GET, POST, etc.)
 
-    'allowed_origins' => ['*localhost*', '*127.0.0.1*', '*:4200*'],
+    'allowed_origins' => [
+        'http://localhost:4200',  // Allow your frontend (Angular app)
+    ],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['*'],  // Allow all headers
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => true,
+    'supports_credentials' => true,  // Ensure credentials are allowed if needed
 
 ];
+
