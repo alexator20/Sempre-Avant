@@ -19,11 +19,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*localhost*', '*127.0.0.1*', '*:4200*'],
+    'allowed_origins' => ['http://localhost:4200'],
 
-    'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['X-Custom-Header', 'Content-Type', 'X-XSRF-TOKEN'],
 
     'exposed_headers' => [],
 

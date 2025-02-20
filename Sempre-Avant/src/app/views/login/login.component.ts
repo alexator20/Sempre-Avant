@@ -1,22 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { tap, catchError } from 'rxjs/operators';
-import { Login } from '../../interfaces/servi.interface';
+import { Login, LoginResponse } from '../../interfaces/servi.interface';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Router } from '@angular/router';
-
-
-
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, HeaderComponent],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent {
   reactiveForm = new FormGroup({
     username: new FormControl(''),
@@ -25,66 +22,45 @@ export class LoginComponent {
   public rol: string = "";
   public error: string = "";
 
-
-
   constructor(public formularioService: LoginService, private router: Router) { }
 
-  onSubmit() {
+  async onSubmit() {
     const userData: Login = {
-      name: this.reactiveForm.value.username !== undefined ? this.reactiveForm.value.username : null,
-      password: this.reactiveForm.value.password !== undefined ? this.reactiveForm.value.password : null
+      name: this.reactiveForm.value.username ?? null,
+      password: this.reactiveForm.value.password ?? null
     };
 
+    try {
+      // Obtener el Observable usando await
+      const observable = await this.formularioService.enviarDatos(userData);
 
-    this.formularioService.enviarDatos(userData)
-      .pipe(
-        tap({
-          next: response => {
-            console.log('Respuesta del servidor:', response);
-            // Puedes hacer algo con la respuesta si lo necesitas
-            if (Array.isArray(response) && response.length > 0) {
-              console.log("rol: ", this.rol);
-              if (response[0].message == "este no es su contraseña") {
-                this.error = "error 1234";
+      // Usar el Observable con .pipe()
+      observable.pipe(
+        tap((response: LoginResponse) => {
+          console.log('Respuesta del servidor:', response);
 
-              } else {
-
-                console.log("rol: ", this.rol);
-                this.error = "";
-                localStorage.setItem('rol', this.rol);
-                const nuevaventana = window.open("http://localhost:4200");
-                /*
-                nuevaventana.onload=()=>{
-                  nuevaventana?.location.reload();
-                }*/
-                this.router.navigate(['/home']);
-              }
-            }
-
-
-            if (response.user.rol) {
-              this.rol = response.user.rol;
-            } else {
-              this.rol = "user";
-            }
-            console.log("rol: ", this.rol);
-
-            localStorage.setItem('rol', this.rol);
-            window.open("http://localhost:4200");
-          },
-          error: error => {
-            console.error('Error al enviar los datos:', error);
+          // Verificar si la respuesta tiene la estructura esperada
+          if (response.user && response.user.rol) {
+            this.rol = response.user.rol;
+          } else {
+            this.rol = "user";
           }
+
+          // Guardar el rol en localStorage
+          localStorage.setItem('rol', this.rol);
+
+          // Navegar a la ruta '/home'
+          this.router.navigate(['/home']);
+        }),
+        catchError((error) => {
+          console.error('Error al enviar los datos:', error);
+          this.error = "Error al iniciar sesión. Inténtalo de nuevo.";
+          return of(null); // Retornar un Observable para manejar el error sin romper el flujo
         })
-      )
-      .subscribe();
-
-    /*
-     this.formularioService.enviarDatos(userData).subscribe(response => {
-       console.log(response);
-     });
-*/
+      ).subscribe();
+    } catch (error) {
+      console.error('Error al enviar datos:', error);
+      this.error = "Error al iniciar sesión. Inténtalo de nuevo.";
+    }
   }
-
-
 }

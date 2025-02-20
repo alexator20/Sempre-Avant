@@ -33,9 +33,11 @@ class AuthController extends Controller
         Log::info('Prueba de log');
 
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255', 'exists:users'],
+            'name' => ['required', 'string', 'max:255', 'exists:users,name'],
             'password' => ['required', 'string', 'min:6'],
         ]);
+
+        Log::info('Prueba de log 2');
 
         $user = User::where('name', $data['name'])->first();
 
